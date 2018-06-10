@@ -21,6 +21,11 @@ export function activate(context: vscode.ExtensionContext) {
         const files = fs.readdirSync(currentFileDir).filter(file => !/^index[.]\w+$/i.test(file));
 
         const text = files
+            .filter(file => {
+                const isTypescriptFile = file.endsWith(".ts") || file.endsWith(".tsx");
+                const isMaybeDirectory = !file.includes(".");
+                return isTypescriptFile || isMaybeDirectory;
+            })
             .sort()
             .map(file => {
                 const withoutFileExtension = file.replace(/[.].+$/, '');
