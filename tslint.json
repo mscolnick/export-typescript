@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "@blueprintjs/tslint-config"
+  ],
+  "rules": {
+    "no-submodule-imports": [
+      true,
+      "vscode"
+    ]
+  }
+}
