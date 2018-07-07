@@ -1,6 +1,7 @@
 # export-typescript
 
-While in an `index.ts` file, run this extension ("Export Typescript") to add `export * from ./<FILE_OR_FOLDER>` for each sibling file/folder in the current directory.
+1. Automatically export typescript files when newly creating an index.ts file.
+2. While in an `index.ts` file, run this extension ("Export Typescript") to add `export * from ./<FILE_OR_FOLDER>` for each sibling file/folder in the current directory.
 
 ### 0.0.3
 
