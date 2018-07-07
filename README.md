@@ -1,6 +1,6 @@
-# export-typescript README
+# export-typescript
 
-While in a `index.ts` file, run this extensions to add `export * from ./<FILE_OR_FOLDER>` for each child file/folder in the current directory.
+While in an `index.ts` file, run this extension ("Export Typescript") to add `export * from ./<FILE_OR_FOLDER>` for each sibling file/folder in the current directory.
 
 ### 0.0.1
 

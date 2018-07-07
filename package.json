@@ -1,17 +1,29 @@
 {
     "name": "export-typescript",
     "displayName": "export-typescript",
-    "description": "Create index.ts file and export",
+    "description": "Create an index.ts file and export",
     "version": "0.0.2",
     "publisher": "mscolnick",
     "engines": {
         "vscode": "^1.14.0"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mscolnick/export-typescript.git"
+    },
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "tsx",
+        "file",
+        "template",
+        "typescript",
+        "react"
+    ],
     "activationEvents": [
-        "onCommand:extension.exportTypescript"
+        "onCommand:extension.exportTypescript",
+        "onLanguage:typescript"
     ],
     "main": "./out/src/extension",
     "contributes": {
