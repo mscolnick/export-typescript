@@ -1,7 +1,12 @@
+import { TypescriptParser } from "typescript-parser";
 import { Disposable, window, workspace } from "vscode";
 import { addTsExports } from "./AddTsExports";
 
+const defaultToExportStar = true;
+
 export class Templater {
+    constructor(private parser: TypescriptParser) {}
+
     public dispose() {
         // noop
     }
@@ -22,11 +27,14 @@ export class Templater {
             return;
         }
 
-        addTsExports(doc, editor);
+        if (defaultToExportStar) {
+            addTsExports(doc, editor, undefined);
+        } else {
+            addTsExports(doc, editor, this.parser);
+        }
     }
 }
 
-// tslint:disable-next-line:max-classes-per-file
 export class TemplaterController {
     private disposable: Disposable;
 

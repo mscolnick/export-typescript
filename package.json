@@ -22,15 +22,20 @@
         "react"
     ],
     "activationEvents": [
-        "onCommand:extension.exportTypescript",
+        "onCommand:extension.exportStarTypescript",
+        "onCommand:extension.exportExportableDeclarationsTypescript",
         "onLanguage:typescript"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.exportTypescript",
-                "title": "Export Typescript"
+                "command": "extension.exportStarTypescript",
+                "title": "Export typescript - all declarations (as star)"
+            },
+            {
+                "command": "extension.exportExportableDeclarationsTypescript",
+                "title": "Export typescript - all exportable declarations"
             }
         ]
     },
@@ -49,6 +54,7 @@
         "mocha": "^2.3.3",
         "tslint": "^5.10.0",
         "typescript": "^2.0.3",
+        "typescript-parser": "^2.5.0",
         "vscode": "^1.1.4"
     },
     "dependencies": {}

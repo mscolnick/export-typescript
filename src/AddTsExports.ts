@@ -1,28 +1,35 @@
 import { existsSync, lstatSync, readdirSync } from "fs";
 import { basename, dirname, extname, join } from "path";
-import { TextDocument, TextEditor } from "vscode";
+import { Declaration, ExportableDeclaration, TypescriptParser } from "typescript-parser";
+import { TextDocument, TextEditor, workspace } from "vscode";
 
-export function addTsExports(doc: TextDocument, editor: TextEditor) {
+export async function addTsExports(doc: TextDocument, editor: TextEditor, parser: TypescriptParser | undefined) {
     const currentDirectory = dirname(doc.fileName);
 
     const directoriesAndFiles = readdirSync(currentDirectory);
     const directoryImports: string[] = [];
     const fileImports: string[] = [];
 
-    directoriesAndFiles.forEach(directoryOrFile => {
+    for (const directoryOrFile of directoriesAndFiles) {
         if (directoryOrFile === basename(doc.fileName)) {
-            return; // Skip ourself
+            continue; // Skip ourself
         }
         const path = join(currentDirectory, directoryOrFile);
         if (lstatSync(path).isDirectory()) {
             if (containsTypescriptIndexFileSync(path)) {
-                directoryImports.push(createExportString(directoryOrFile));
+                directoryImports.push(createExportStarExport(directoryOrFile));
             }
         } else if (directoryOrFile.endsWith(".ts") || directoryOrFile.endsWith(".tsx")) {
-            const typescriptFileName = basename(path, extname(path));
-            fileImports.push(createExportString(typescriptFileName));
+            if (parser === undefined) {
+                const typescriptFileName = basename(path, extname(path));
+                const starExport = createExportStarExport(typescriptFileName);
+                fileImports.push(starExport);
+            } else {
+                const exportableDeclarations = await createExportableDeclarationsExport(path, parser);
+                fileImports.push(...exportableDeclarations);
+            }
         }
-    });
+    }
 
     const fileContents: string[] = [
         ...directoryImports,
@@ -35,10 +42,27 @@ export function addTsExports(doc: TextDocument, editor: TextEditor) {
     });
 }
 
-function containsTypescriptIndexFileSync(directory: string) {
+function containsTypescriptIndexFileSync(directory: string): boolean {
     return existsSync(join(directory, "index.ts"));
 }
 
-function createExportString(directoryOrFile: string) {
+function createExportStarExport(directoryOrFile: string): string {
     return `export * from "./${directoryOrFile}";`;
+}
+
+function isExported(declaration: Declaration): declaration is ExportableDeclaration {
+    return (declaration as ExportableDeclaration).isExported === true;
+}
+
+async function createExportableDeclarationsExport(path: string, parser: TypescriptParser): Promise<string[]> {
+    if (workspace.rootPath === undefined) {
+        console.error("[export-typescript] workspace.rootPath is undefined");
+        return [];
+    }
+
+    const file = await parser.parseFile(path, workspace.rootPath);
+    const declarations = file.declarations;
+    const exportedDeclarations = declarations.filter(isExported);
+    const fileName = basename(path, extname(path));
+    return [`export {`, ...exportedDeclarations.map(d => `    ${d.name},`), `} from "./${fileName}";`];
 }
