@@ -54,8 +54,9 @@
         "mocha": "^2.3.3",
         "tslint": "^5.10.0",
         "typescript": "^2.0.3",
-        "typescript-parser": "^2.5.0",
         "vscode": "^1.1.4"
     },
-    "dependencies": {}
+    "dependencies": {
+        "typescript-parser": "^2.5.0"
+    }
 }
