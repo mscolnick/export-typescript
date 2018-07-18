@@ -2,7 +2,7 @@
     "name": "export-typescript",
     "displayName": "export-typescript",
     "description": "Create an index.ts file and export",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "mscolnick",
     "engines": {
         "vscode": "^1.14.0"
