@@ -6,24 +6,4 @@
 
 ## Changelog
 
-### 0.0.5
-
-- Add command to export all exportable declarations explicitly instead of '*'.
-  - `Export typescript - all exportable declarations`
-
-### 0.0.4
-
- - blacklisted
-
-### 0.0.3
-
-- Run command on newly created index.ts files
-- Export folders only when they have an index.ts file
-
-### 0.0.2
-
-- Export folders and only typescript files
-
-### 0.0.1
-
-- Initial release. No special features or settings.
+[CHANGELOG.md](https://github.com/mscolnick/export-typescript/blob/master/CHANGELOG.md)
