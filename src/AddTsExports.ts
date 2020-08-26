@@ -1,7 +1,7 @@
 import { existsSync, lstatSync, readdirSync } from "fs";
 import { basename, dirname, extname, join } from "path";
 import { Declaration, ExportableDeclaration, TypescriptParser } from "typescript-parser";
-import { TextDocument, TextEditor, workspace } from "vscode";
+import { TextDocument, TextEditor, workspace, Range } from "vscode";
 
 export async function addTsExports(doc: TextDocument, editor: TextEditor, parser: TypescriptParser | undefined) {
     const currentDirectory = dirname(doc.fileName);
@@ -38,7 +38,8 @@ export async function addTsExports(doc: TextDocument, editor: TextEditor, parser
     ];
 
     editor.edit(builder => {
-        builder.insert(doc.positionAt(0), fileContents.join("\n"));
+        const range = new Range(0,0, doc.lineCount- 1, doc.lineAt(doc.lineCount-1).range.end.character)
+        builder.replace(range, fileContents.join("\n"));
     });
 }
 
