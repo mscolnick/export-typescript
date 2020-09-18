@@ -12,10 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: npm install
-      uses: actions/npm@master
-      with:
-        args: install --unsafe-perm
+    - run: yarn install
 
     - name: Vscode release plugin
       uses: JCofman/vscodeaction@1.0.0
