@@ -1,8 +1,8 @@
-import { dirname } from "path"
-import { Declaration, ExportableDeclaration, TypescriptParser } from "typescript-parser"
-import { Range, TextEditor } from "vscode"
-import { ExtensionConfig } from "./config"
-import globby = require("globby")
+import * as globby from "globby";
+import { dirname } from "path";
+import { Declaration, ExportableDeclaration, TypescriptParser } from "typescript-parser";
+import { Range, TextEditor } from "vscode";
+import { ExtensionConfig } from "./config";
 
 export async function replaceExports(editor: TextEditor, config: ExtensionConfig, parser: TypescriptParser) {
   const exportStatements = await getExportStatements(editor.document.fileName, config, parser)

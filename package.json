@@ -52,6 +52,7 @@
     "vscode": "^1.1.37"
   },
   "dependencies": {
+    "globby": "^11.0.1",
     "typescript-parser": "^2.6.1"
   },
   "configuration": {
