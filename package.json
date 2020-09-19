@@ -3,6 +3,7 @@
   "displayName": "export-typescript",
   "description": "Create an index.ts file and export",
   "version": "0.2.0",
+  "files": ["out"],
   "publisher": "mscolnick",
   "engines": {
     "vscode": "^1.14.0"
@@ -25,7 +26,7 @@
     "onCommand:export-typescript.replace-exports",
     "onLanguage:typescript"
   ],
-  "main": "./out/src/extension",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -35,14 +36,16 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "tsc -p ./",
-    "compile": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "node ./node_modules/vscode/bin/test",
+    "vscode:prepublish": "npm run build",
+    "build": "rollup -c",
+    "dev": "npm run build -w",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-typescript": "^6.0.0",
     "@types/mocha": "^8.0.3",
     "@types/node": "^14.6.0",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
@@ -52,6 +55,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "mocha": "^8.1.2",
     "prettier": "^2.1.2",
+    "rollup": "^2.27.1",
     "typescript": "^4.0.2",
     "vscode": "^1.1.37"
   },
