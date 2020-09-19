@@ -3,11 +3,12 @@
   "displayName": "export-typescript",
   "description": "Create an index.ts file and export",
   "version": "0.2.0",
-  "files": ["out"],
+  "files": ["out", "images"],
   "publisher": "mscolnick",
   "engines": {
     "vscode": "^1.14.0"
   },
+  "icon": "images/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/mscolnick/export-typescript.git"
@@ -20,7 +21,8 @@
     "file",
     "template",
     "typescript",
-    "react"
+    "react",
+    "barrel"
   ],
   "activationEvents": [
     "onCommand:export-typescript.replace-exports",
