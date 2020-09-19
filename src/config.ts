@@ -14,7 +14,7 @@ export function loadConfig(): ExtensionConfig {
 
   return {
     defaultToExportStar: inputDefaultToExportStar ?? true,
-    includes: inputIncludes ? removeStartingDotSlash(inputIncludes) : ["*.{ts,tsx}"],
+    includes: inputIncludes ? removeStartingDotSlash(inputIncludes) : ["*.{ts,tsx}", "*/index.{ts,tsx}"],
     excludes: inputExcludes ? removeStartingDotSlash(inputExcludes) : ["*.{spec.ts,spec.tsx}"],
   };
 }

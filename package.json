@@ -31,7 +31,7 @@
     "commands": [
       {
         "command": "export-typescript.replace-exports",
-        "title": "Export typescript - all declarations"
+        "title": "Export Typescript: Write exports"
       }
     ]
   },
@@ -81,7 +81,7 @@
           "type": "string"
         },
         "description": "Files to include in the export search, e.g. '*.{ts,tsx}'",
-        "default": "['*.{ts,tsx}']"
+        "default": "['*.{ts,tsx}', '*/index.{ts,tsx}']"
       },
       "export-typescript.excludes": {
         "type": [
