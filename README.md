@@ -11,7 +11,7 @@
 The default configuration is
 
 ```
-"export-typescript-recursively": {
+"export-typescript": {
   "exportStar": true,
   "includes": ["*.{ts,tsx}"],
   "excludes": ["*.{spec.ts,spec.tsx}"]
@@ -21,7 +21,7 @@ The default configuration is
 In order to export declarations and look for files in subdirectories, put the folling in your `.vscode/settings.json`:
 
 ```
-"export-typescript-recursively": {
+"export-typescript": {
   "exportStar": false,
   "includes": ["**/*.{ts,tsx}"],
   "excludes": ["**/*.{spec.ts,spec.tsx}"]
