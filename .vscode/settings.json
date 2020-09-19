@@ -6,7 +6,6 @@
     "search.exclude": {
         "out": true // set this to false to include "out" folder in search results
     },
-    "tslint.configFile": "./tslint.json",
     "editor.tabSize": 2,
     "editor.rulers": [120],
     "editor.autoIndent": "full",
