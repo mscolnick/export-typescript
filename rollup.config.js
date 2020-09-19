@@ -11,9 +11,8 @@ export default {
     sourcemap: true
   },
   external: [
-    "typescript-parser",
-    "vscode",
-    "path",
+    "vscode", // include by vscode
+    "path", // this and below come from from node.js
     "fs",
     "url",
     "events",
