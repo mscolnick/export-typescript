@@ -2,8 +2,11 @@
   "name": "export-typescript",
   "displayName": "export-typescript",
   "description": "Create an index.ts file and export",
-  "version": "0.2.0",
-  "files": ["out", "images"],
+  "version": "0.3.0",
+  "files": [
+    "out",
+    "images"
+  ],
   "publisher": "mscolnick",
   "engines": {
     "vscode": "^1.14.0"
