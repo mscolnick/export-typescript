@@ -1,8 +1,10 @@
 import * as globby from "globby";
-import { dirname } from "path";
+
 import { Declaration, ExportableDeclaration, TypescriptParser } from "typescript-parser";
 import { Range, TextEditor } from "vscode";
+
 import { ExtensionConfig } from "./config";
+import { dirname } from "path";
 
 export async function replaceExports(
   editor: TextEditor,
@@ -43,11 +45,7 @@ async function getExportStatements(docFilename: string, config: ExtensionConfig,
     }
   }
 
-  return [
-    ...directoryImports,
-    ...fileImports,
-    "", // Add a new line at the end
-  ];
+  return [...directoryImports, ...fileImports];
 }
 function getRelFilename(absPath: string, rootPath: string) {
   return absPath.slice(rootPath.length + 1);
