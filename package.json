@@ -7,7 +7,7 @@
     "out",
     "images"
   ],
-  "publisher": "dev-mscolnick",
+  "publisher": "mscolnick",
   "engines": {
     "vscode": "^1.14.0"
   },
