@@ -38,7 +38,40 @@
         "command": "export-typescript.replace-exports",
         "title": "Export Typescript: Write exports"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Configuration",
+      "properties": {
+        "export-typescript.exportStar": {
+          "type": "boolean",
+          "default": true,
+          "description": "If true, 'export { * } ...' else 'export { Class } ...'"
+        },
+        "export-typescript.includes": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Files to include in the export search, e.g. '*.{ts,tsx}'",
+          "default": ["*.{ts,tsx}', '*/index.{ts,tsx}"]
+        },
+        "export-typescript.excludes": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Files to exclude in the export search, e.g. '*.{spec.ts,spec.tsx}'",
+          "default": ["*.{spec.ts,spec.tsx}"]
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
@@ -67,38 +100,5 @@
   "dependencies": {
     "globby": "^11.0.1",
     "typescript-parser": "^2.6.1"
-  },
-  "configuration": {
-    "type": "object",
-    "title": "Configuration",
-    "properties": {
-      "export-typescript.exportStar": {
-        "type": "boolean",
-        "default": true,
-        "description": "If true, 'export { * } ...' else 'export { Class } ...'"
-      },
-      "export-typescript.includes": {
-        "type": [
-          "string",
-          "array"
-        ],
-        "items": {
-          "type": "string"
-        },
-        "description": "Files to include in the export search, e.g. '*.{ts,tsx}'",
-        "default": "['*.{ts,tsx}', '*/index.{ts,tsx}']"
-      },
-      "export-typescript.excludes": {
-        "type": [
-          "string",
-          "array"
-        ],
-        "items": {
-          "type": "string"
-        },
-        "description": "Files to exclude in the export search, e.g. '*.{spec.ts,spec.tsx}'",
-        "default": "['*.{spec.ts,spec.tsx}']"
-      }
-    }
   }
 }
