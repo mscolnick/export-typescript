@@ -7,10 +7,10 @@ export interface ExtensionConfig {
 }
 
 export function loadConfig(): ExtensionConfig {
-  const config = vscode.workspace.getConfiguration("export-typescript");
-  const inputDefaultToExportStar = config.get<boolean>("exportStar");
-  const inputIncludes = config.get<string[]>("includes");
-  const inputExcludes = config.get<string[]>("excludes");
+  const config = vscode.workspace.getConfiguration();
+  const inputDefaultToExportStar = config.get<boolean>("export-typescript.exportStar");
+  const inputIncludes = config.get<string[]>("export-typescript.includes");
+  const inputExcludes = config.get<string[]>("export-typescript.excludes");
 
   return {
     defaultToExportStar: inputDefaultToExportStar ?? true,

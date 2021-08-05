@@ -2,6 +2,14 @@
 
 All notable changes to the "export-typescript" extension will be documented in this file.
 
+## [0.4.1]
+
+- Fix publish
+
+## [0.4.0]
+
+- Fix default configuration. Fixes #7
+
 ## [0.3.1]
 
 - include `typescript-parser` dependency in bundle
