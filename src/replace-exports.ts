@@ -4,6 +4,7 @@ import { Declaration, ExportableDeclaration, TypescriptParser } from "typescript
 import { Range, TextEditor } from "vscode";
 
 import { ExtensionConfig } from "./config";
+import { getQuoteChar, getQuoteStyleForFile } from "./quote.utils";
 import { dirname } from "path";
 
 export async function replaceExports(
@@ -27,6 +28,9 @@ function replaceFileContents(editor: TextEditor, replacement: string) {
 async function getExportStatements(docFilename: string, config: ExtensionConfig, parser: TypescriptParser) {
   const rootDir = dirname(docFilename);
 
+  const quoteStyle = getQuoteStyleForFile(docFilename, config);
+  const quoteChar = getQuoteChar(quoteStyle);
+
   const directoryImports: string[] = [];
   const fileImports: string[] = [];
 
@@ -37,10 +41,10 @@ async function getExportStatements(docFilename: string, config: ExtensionConfig,
     }
     const relFilename = getRelFilename(absFilename, rootDir);
     if (config.defaultToExportStar) {
-      const starExport = createExportStarExport(relFilename);
+      const starExport = createExportStarExport(relFilename, quoteChar);
       fileImports.push(starExport);
     } else {
-      const exportableDeclarations = await createExportableDeclarationsExport(rootDir, relFilename, parser);
+      const exportableDeclarations = await createExportableDeclarationsExport(rootDir, relFilename, parser, quoteChar);
       fileImports.push(...exportableDeclarations);
     }
   }
@@ -67,10 +71,10 @@ function getSourceFiles(root: string, relIncludes: string[], relExcludes: string
   return globby.stream(absInludes, { ignore: absExcludes });
 }
 
-function createExportStarExport(relFilename: string): string {
+function createExportStarExport(relFilename: string, quoteChar: string): string {
   const withoutExt = getFilenameWithoutExt(relFilename);
   const exportName = withoutExt.endsWith("/index") ? getFilenameWithoutIndex(withoutExt) : withoutExt;
-  return `export * from "./${exportName}";`;
+  return `export * from ${createExportFilename(exportName, quoteChar)};`;
 }
 
 function isExported(declaration: Declaration): declaration is ExportableDeclaration {
@@ -81,6 +85,7 @@ async function createExportableDeclarationsExport(
   rootPath: string,
   relFilename: string,
   parser: TypescriptParser,
+  quoteChar: string,
 ): Promise<string[]> {
   const absFilename = getAbsFilename(rootPath, relFilename);
   const file = await parser.parseFile(absFilename, rootPath);
@@ -88,5 +93,13 @@ async function createExportableDeclarationsExport(
   const exportedDeclarations = declarations.filter(isExported);
   const withoutExt = getFilenameWithoutExt(relFilename);
   const exportName = withoutExt.endsWith("/index") ? getFilenameWithoutIndex(withoutExt) : withoutExt;
-  return [`export {`, ...exportedDeclarations.map((d) => `    ${d.name},`), `} from "./${exportName}";`];
+  return [
+    `export {`,
+    ...exportedDeclarations.map((d) => `    ${d.name},`),
+    `} from ${createExportFilename(exportName, quoteChar)};`,
+  ];
+}
+
+function createExportFilename(exportName: string, quoteChar: string): string {
+  return `${quoteChar}./${exportName}${quoteChar}`;
 }
