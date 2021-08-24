@@ -4,6 +4,10 @@ All notable changes to the "export-typescript" extension will be documented in t
 
 ## [0.4.1]
 
+- Add a config to support double quotes #16 (Fixes #8)
+
+## [0.4.1]
+
 - Fix publish
 
 ## [0.4.0]
