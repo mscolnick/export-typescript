@@ -15,7 +15,7 @@ jobs:
     - run: yarn install
 
     - name: Vscode release plugin
-      uses: JCofman/vscodeaction@1.0.0
+      uses: JCofman/vscodeaction@2.0.1
       env:
         PUBLISHER_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
       with:
