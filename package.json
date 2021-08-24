@@ -2,7 +2,7 @@
   "name": "export-typescript",
   "displayName": "export-typescript",
   "description": "Create an index.ts file and export",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "files": [
     "out",
     "images"
